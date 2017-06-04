@@ -1,0 +1,10 @@
+variables:
+  BUILDER_IMAGE_REVISION: "$(cat IMAGE_VERSION)"
+   
+build1:
+ stage: build
+ script:
+   - echo "Hola World"
+   - echo $BUILDER_IMAGE_REVISION
+   - echo "Hello World"
+   - echo "$(cat IMAGE_VERSION)"
