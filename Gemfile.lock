@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cssmin (1.0.3)
+    tilt (2.0.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cssmin
+  tilt
+
+BUNDLED WITH
+   1.14.6
