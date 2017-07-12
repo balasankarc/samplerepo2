@@ -1,0 +1,5 @@
+build1:
+ stage: build
+ script:
+   - echo ${CI_REGISTRY_IMAGE}
+   - export
