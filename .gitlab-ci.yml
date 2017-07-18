@@ -3,5 +3,5 @@ build1:
  script:
    - echo ${CI_REGISTRY_IMAGE}
    - export
-  only:
-    - balasankarc/samplerepo
+ only:
+   - balasankarc/samplerepo
