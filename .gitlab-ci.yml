@@ -1,10 +1,10 @@
 stages:
   - package
-  - notification_fail
+  - package_notification_fail
   - images
-  - notification_fail
+  - image_notification_fail
   - qa
-  - notification_fail
+  - qa_notification_fail
 
 build1:
  stage: package
@@ -21,8 +21,19 @@ build3:
  script:
    - exit 0
    
-notification:
-  stage: notification_fail
+.slack_fail_template: &slack_fail
   script:
     - echo "Failed"
   when: on_failure
+  
+package-fail:
+  stage: package_notification_fail
+  <<: *slack_fail
+  
+image-fail:
+  stage: image_notification_fail
+  <<: *slack_fail
+  
+qa-fail:
+  stage: qa_notification_fail
+  <<: *slack_fail
