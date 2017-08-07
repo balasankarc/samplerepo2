@@ -7,7 +7,7 @@ stages:
 build1:
  stage: package
  script:
-   - exit 1
+   - exit 0
 
 build2:
  stage: images
