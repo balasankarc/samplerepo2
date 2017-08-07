@@ -12,7 +12,7 @@ build1:
 build2:
  stage: images
  script:
-   - exit 1
+   - exit 0
    
 build3:
  stage: qa
