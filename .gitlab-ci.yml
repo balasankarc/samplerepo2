@@ -1,6 +1,28 @@
+stages:
+  - package
+  - notification_fail
+  - images
+  - notification_fail
+  - qa
+  - notification_fail
+
 build1:
- stage: build
+ stage: package
  script:
-   - echo ${CI_REGISTRY_IMAGE}
- only:
-   - //@balasankarc/samplerepo
+   - exit 1
+
+build2:
+ stage: images
+ script:
+   - exit 0
+   
+build3:
+ stage: qa
+ script:
+   - exit 0
+   
+notification:
+  stage: notification_fail
+  script:
+    - echo "Failed"
+  when: on_failure
