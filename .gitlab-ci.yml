@@ -7,16 +7,5 @@ build1:
  stage: package
  script:
    - apt-get update
-   - apt-get -y install git ssh openssh-client
-   - mkdir -p ~/.ssh
-   - echo "$CI_KEY" > ~/.ssh/id_rsa
-   - ssh-keyscan -H gitlab.com > ~/.ssh/known_hosts
-   - chmod -R 0600 ~/.ssh/
-   - git clone git@gitlab.com:balasankarc/samplerepo2.git /tmp/samplerepo2
-   - cd /tmp/samplerepo2
-   - git config user.email "email@example.com"
-   - git config user.name "John Doe"
-   - touch $$
-   - git add .
-   - git commit -m "Test"
-   - git push origin master
+   - apt-get -y install curl
+   - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://gitlab.com/api/v4/projects/3124666/trigger/pipeline
