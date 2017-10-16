@@ -3,14 +3,14 @@ image: "debian:stretch"
 stages:
   - package
 
-Ubuntu 14.04 CE:
+Ubuntu 14.04 CE 0 2:
  stage: package
  script:
    - apt-get update
    - apt-get -y install curl
    - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://gitlab.com/api/v4/projects/3124666/trigger/pipeline
 
-Ubuntu 14.04 EE:
+Ubuntu 14.04 EE 1 2:
  stage: package
  script:
    - apt-get update
