@@ -4,4 +4,4 @@ job_build:
  script:
    - echo "Yes"
  tags:
-  - google-runner
+  - omnibus-google
