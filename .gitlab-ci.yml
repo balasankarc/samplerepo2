@@ -1,11 +1,7 @@
 image: "alpine:latest"
 
-stages:
-  - package
-
-build1:
- stage: package
+job_build:
  script:
    - echo "Yes"
-  tags:
+ tags:
   - google-runner
