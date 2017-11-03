@@ -3,9 +3,10 @@ image: "alpine:latest"
 job_build:
  script:
    - echo "Yes"
+   - date > output
  tags:
   - gce-cache
  cache:
    key: "balu4"
    paths:
-   - Gemfile.lock
+   - output
