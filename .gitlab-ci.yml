@@ -3,7 +3,6 @@ image: "alpine:latest"
 job_build:
  script:
    - echo "Yes"
-   - sleep 5m
  tags:
   - gce-cache
  cache:
