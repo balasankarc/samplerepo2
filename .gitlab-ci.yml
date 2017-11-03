@@ -6,6 +6,6 @@ job_build:
  tags:
   - gce-cache
  cache:
-   key: "balu3"
+   key: "balu4"
    paths:
    - Gemfile.lock
