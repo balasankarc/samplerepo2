@@ -4,4 +4,8 @@ job_build:
  script:
    - echo "Yes"
  tags:
-  - omnibus-google
+  - gce-cache
+ cache:
+   key: "balu"
+   paths:
+   - Gemfile.lock
