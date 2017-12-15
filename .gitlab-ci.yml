@@ -5,5 +5,5 @@ job_build:
     - export TRIGGERED_USER=12345
     - export TRIGGER_SOURCE=5678
     - if [ -n "$TRIGGERED_USER" ] && [ -n "$TRIGGER_SOURCE" ]; then
-      echo "Pipeline triggered by $TRIGGERED_USER at $TRIGGER_SOURCE";
+        echo "Pipeline triggered by $TRIGGERED_USER at $TRIGGER_SOURCE";
       fi
