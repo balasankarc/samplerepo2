@@ -2,4 +2,8 @@ image: "alpine:latest"
 
 job_build:
  script:
-   - echo "$(pwd)"
+    - export TRIGGERED_USER=12345
+    - export TRIGGER_SOURCE=5678
+    - if [ -n "$TRIGGERED_USER" ] && [ -n "$TRIGGER_SOURCE" ]; then \
+      echo "Pipeline triggered by $TRIGGERED_USER at $TRIGGER_SOURCE"; \
+      fi
