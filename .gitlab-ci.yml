@@ -2,4 +2,4 @@ image: "alpine:latest"
 
 job_build:
  script:
-    - if [ "$CI_JOB_NAME" == "job_build" ] ; then echo "Yes"; else echo "No"; fi
+    - if [ "$CI_JOB_NAME" == "job_build24" ] ; then echo "Yes"; else echo "No"; fi
