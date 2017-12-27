@@ -2,12 +2,4 @@ image: "alpine:latest"
 
 job_build:
  script:
-    - echo "Hello"
- cache:
-   key: "balu"
-   paths:
-   - Gemfile.lock
- artifacts:
-   expire_in: 1d
-   paths:
-   - cache.zip
+    - if [ "$CI_JOB_NAME" == "job_build" ] ; then echo "Yes"; else echo "No"; fi
