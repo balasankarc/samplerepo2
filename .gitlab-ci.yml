@@ -7,4 +7,7 @@ job_build:
    key: "balu"
    paths:
    - Gemfile.lock
-   - cache.zip
+  artifacts:
+    expire_in: 1d
+    paths:
+    - cache.zip
