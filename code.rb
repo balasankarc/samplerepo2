@@ -1,3 +1,5 @@
+require 'time'
+
 system("sudo apt-get update && sudo apt-get install -y curl openssh-server ca-certificates")
 system("curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash")
 system("sudo apt-get -y install gitlab-ee=10.3.0-ee.0")
