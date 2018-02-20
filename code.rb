@@ -10,9 +10,11 @@ log_location = "/var/log/apt/term.log"
 system("tac #{log_location} | sed '/^Log started/q' | tac > /tmp/upgrade.log")
 start_string = File.open("/tmp/upgrade.log").grep(/Log started/)[0].strip.gsub("Log started: ", "")
 end_string = File.open("/tmp/upgrade.log").grep(/Log ended/)[0].strip.gsub("Log ended: ", "")
+puts "Log Started at " + start_string
+puts "Log Ended at " + end_string
 start_time = DateTime.strptime(start_string, "%Y-%m-%d  %H:%M:%S")
 end_time = DateTime.strptime(end_string, "%Y-%m-%d  %H:%M:%S")
-duration_in_secs = (end_time - start_time) * 24 * 60 * 60
+duration_in_secs = ((end_time - start_time) * 24 * 60 * 60).to_i
 item = "10.4.0-ee.0, #{duration_in_secs}"
 
 puts item
