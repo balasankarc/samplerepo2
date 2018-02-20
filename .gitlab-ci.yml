@@ -1,5 +1,6 @@
-image: ubuntu:16.04
+image: "registry.gitlab.com/gitlab-org/gitlab-omnibus-builder:ubuntu_16.04-0.0.12"
 
 build:
  script:
  - whoami
+ - ruby code.rb
