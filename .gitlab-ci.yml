@@ -1,7 +1,15 @@
-image: "registry.gitlab.com/gitlab-org/gitlab-omnibus-builder:ubuntu_16.04-0.0.12"
+image: starefossen/ruby-node:latest
 
-build:
- script:
- - whoami
- - apt-get update && apt-get install sudo
- - ruby code.rb
+services:
+   - mongo:latest
+
+variables:
+  MONGO_URI: 'mongodb://mongo/myapp_test'
+  NODE_ENV: 'test'
+
+before_script:
+  - apt-get update && apt-get -y install dnsutils
+
+test:
+  script:
+   - service mongod status
