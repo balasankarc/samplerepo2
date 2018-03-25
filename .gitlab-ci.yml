@@ -1,15 +1,6 @@
-image: starefossen/ruby-node:latest
-
-services:
-   - mongo:latest
-
-variables:
-  MONGO_URI: 'mongodb://mongo/myapp_test'
-  NODE_ENV: 'test'
-
-before_script:
-  - apt-get update && apt-get -y install dnsutils
-
+image: node:4.2.2
 test:
   script:
-   - service mongod status
+   - npm install hexo --save
+   - npm install hexo-cli -g
+   - hexo --version
