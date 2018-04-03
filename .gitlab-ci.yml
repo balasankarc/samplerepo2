@@ -1,4 +1,8 @@
 image: alpine:latest
+stages:
+  - test
+  - build
+  - deploy
 
 b1:
   stage: test
@@ -7,6 +11,12 @@ b1:
    
 b2:
   stage: build
+  when: manual
+  script:
+    - echo "Hello World"
+
+b3:
+  stage: deploy
   when: manual
   script:
     - echo "Hello World"
