@@ -89,7 +89,7 @@ Docker:
 trigger-package-release:
   stage: trigger-release
   when: manual
-  script: "echo Triggered"
+  script: if [[ $(( `date +"%S"` % 2 )) -eq 0 ]]; then return 0; else return 1; fi
   allow_failure: false
 
 CentOS-6-release:
