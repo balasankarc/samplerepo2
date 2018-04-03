@@ -1,6 +1,12 @@
-image: node:4.2.2
-test:
+image: alpine:latest
+
+b1:
+  stage: test
   script:
-   - npm install hexo --save
-   - npm install hexo-cli -g
-   - hexo --version
+   - echo "Good Morning"
+   
+b2:
+  stage: build
+  when: manual
+  script:
+    - echo "Hello World"
