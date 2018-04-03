@@ -89,7 +89,7 @@ Docker:
 trigger-package-release:
   stage: trigger-release
   when: manual
-  script: if [[ $(( `date +"%S"` % 2 )) -eq 0 ]]; then return 0; else return 1; fi
+  script: exit 1
   allow_failure: false
 
 CentOS-6-release:
@@ -139,3 +139,11 @@ Docker-release:
 Upgrade:
   stage: metrics
   script: "echo Upgrade"
+  
+Raspberry-Pi-2-Jessie:
+  stage: raspbian
+  script: "echo RPi"
+  
+Raspberry-Pi-2-Jessie-release:
+  stage: raspbian-release
+  script: "echo RPi release"
