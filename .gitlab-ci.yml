@@ -1,28 +1,148 @@
 image: alpine:latest
 stages:
-  - test
-  - build
-  - deploy
+  - package
+  - staging_upload
+  - images
+  - trigger-release-package
+  - release
+  - trigger-release-image
+  - image-release
+  - metrics
+  - raspbian
+  - raspbian-release
 
-b1:
-  stage: test
-  script:
-   - echo "Good Morning"
-   
-b2:
-  stage: build
-  when: manual
-  script:
-    - echo "Hello World"
-    
-b3:
-  stage: build
-  when: manual
-  script:
-    - echo "Hello World"
+CentOS-6:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
 
-b4:
-  stage: deploy
+CentOS-7:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-7:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-8:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-9.1:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+OpenSUSE-43.1:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+SLES-12:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-14.04:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-16.04:
+  stage: package
+  script: "echo ${CI_JOB_NAME}"
+
+CentOS-6-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+CentOS-7-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-7-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-8-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-9.1-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+OpenSUSE-43.1-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+SLES-12-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-14.04-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-16.04-staging:
+  stage: staging_upload
+  script: "echo ${CI_JOB_NAME}"
+
+Docker:
+  stage: images
+  script: "echo ${CI_JOB_NAME}"
+  
+trigger-package-release:
+  stage: trigger-release-package
   when: manual
-  script:
-    - echo "Hello World"
+  script: "echo Triggered"
+  allow_failure: false
+
+CentOS-6-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+CentOS-7-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-7-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-8-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+Debian-9.1-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+OpenSUSE-43.1-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+SLES-12-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-12.04-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+Ubuntu-14.04-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+
+trigger-image-release:
+  stage: trigger-release-image
+  when: manual
+  script: "echo Triggered"
+  allow_failure: false
+
+AWS:
+  stage: image-release
+  script: "echo AWS"
+  
+Docker-release:
+  stage: image-release
+  script: "echo Docker"
+  
+Upgrade:
+  stage: metrics
+  script: "echo Upgrade"
