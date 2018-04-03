@@ -14,8 +14,14 @@ b2:
   when: manual
   script:
     - echo "Hello World"
-
+    
 b3:
+  stage: build
+  when: manual
+  script:
+    - echo "Hello World"
+
+b4:
   stage: deploy
   when: manual
   script:
