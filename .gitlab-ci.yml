@@ -89,7 +89,9 @@ Docker:
 trigger-package-release:
   stage: trigger-release
   when: manual
-  script: exit 1
+  script:
+    - echo ${EXIT_STATUS}
+    - exit ${EXIT_STATUS}
   allow_failure: false
 
 CentOS-6-release:
