@@ -1,14 +1,24 @@
 image: alpine:latest
 stages:
+  - trigger-package
+  - trigger-docker
+  - trigger-qa
+  - check
+  - prepare
+  - tests
+  - post-test
   - package
-  - staging_upload
   - images
-  - trigger-release
+  - scan-dependencies
+  - staging_upload
   - release
   - image-release
+  - qa-image
+  - trigger-release
   - metrics
   - raspbian
-  - raspbian-release
+  - raspbian_release
+  - notification_fail
 
 CentOS-6:
   stage: package
@@ -86,66 +96,90 @@ Docker:
   stage: images
   script: "echo ${CI_JOB_NAME}"
   
-trigger-package-release:
+CentOS-6-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+CentOS-7-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+Debian-7-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+Debian-8-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+Debian-9.1-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+OpenSUSE-43.1-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+SLES-12-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+Ubuntu-12.04-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+Ubuntu-14.04-release:
+  stage: release
+  script: "echo ${CI_JOB_NAME}"
+  when: manual
+
+AWS:
+  stage: image-release
+  script: "echo AWS"
+  when: manual
+  
+Docker-release:
+  stage: image-release
+  script: "echo Docker"
+  when: manual
+  
+QA-release:
+  stage: image-release
+  script: "echo Docker"
+  when: manual
+  
+Trigger:release-packages:
   stage: trigger-release
   when: manual
   script:
     - echo ${EXIT_STATUS}
     - exit ${EXIT_STATUS}
-  allow_failure: false
 
-CentOS-6-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
+Trigger:release-images:
+  stage: trigger-release
+  when: manual
+  script:
+    - echo ${EXIT_STATUS}
+    - exit ${EXIT_STATUS}
 
-CentOS-7-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-7-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-8-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-9.1-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-OpenSUSE-43.1-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-SLES-12-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-Ubuntu-12.04-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-Ubuntu-14.04-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-
-AWS:
-  stage: image-release
-  script: "echo AWS"
-  
-Docker-release:
-  stage: image-release
-  script: "echo Docker"
-  
 Upgrade:
   stage: metrics
   script: "echo Upgrade"
+  when: manual
   
 Raspberry-Pi-2-Jessie:
   stage: raspbian
   script: "echo RPi"
   
 Raspberry-Pi-2-Jessie-release:
-  stage: raspbian-release
+  stage: raspbian_release
   script: "echo RPi release"
+  when: manual
