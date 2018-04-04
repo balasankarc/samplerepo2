@@ -11,10 +11,10 @@ stages:
   - images
   - scan-dependencies
   - staging_upload
+  - trigger-release
   - release
   - image-release
   - qa-image
-  - trigger-release
   - metrics
   - raspbian
   - raspbian_release
@@ -151,7 +151,7 @@ Docker-release:
   script: "echo Docker"
   when: manual
   
-QA-release:
+QA-Tag:
   stage: image-release
   script: "echo Docker"
   when: manual
