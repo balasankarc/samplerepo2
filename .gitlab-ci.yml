@@ -11,8 +11,9 @@ stages:
   - images
   - scan-dependencies
   - staging_upload
-  - trigger-release
+  - trigger-packages
   - release
+  - trigger-images
   - image-release
   - qa-image
   - metrics
@@ -157,14 +158,14 @@ QA-Tag:
   when: manual
 
 release:packages:
-  stage: trigger-release
+  stage: trigger-packages
   when: manual
   script:
     - echo ${EXIT_STATUS}
     - exit ${EXIT_STATUS}
 
 release:images:
-  stage: trigger-release
+  stage: trigger-images
   when: manual
   script:
     - echo ${EXIT_STATUS}
