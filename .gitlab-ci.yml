@@ -27,7 +27,6 @@ stages:
     - "echo ${CI_JOB_NAME}"
 
 dependency_scanning:
-  image: alpine:3.7
   stage: scan-dependencies
   script:
     - "echo ${CI_JOB_NAME}"
@@ -39,6 +38,7 @@ dependency_scanning:
 
 .production_release_template: &production_release
   stage: package-release
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
@@ -65,16 +65,19 @@ SLES-12:
 
 Docker:
   stage: images
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
 AWS:
   stage: image-release
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
 QA-Tag:
   stage: image-release
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
@@ -172,7 +175,7 @@ SLES-12-release:
 
 Raspberry-Pi-2-Jessie-release:
   stage: raspbian_release
-  image: "dev.gitlab.org:5005/gitlab/gitlab-build-images:omnibus-gitlab-xenial"
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
@@ -183,6 +186,7 @@ Docker-Release:
 
 upgrade:
   stage: metrics
+  when: manual
   script:
     - "echo ${CI_JOB_NAME}"
 
