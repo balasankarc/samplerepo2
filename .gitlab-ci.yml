@@ -1,4 +1,5 @@
 image: alpine:latest
+
 stages:
   - trigger-package
   - trigger-docker
@@ -12,175 +13,187 @@ stages:
   - scan-dependencies
   - staging_upload
   - trigger-packages
-  - release
+  - package-release
   - trigger-images
   - image-release
-  - qa-image
   - metrics
   - raspbian
   - raspbian_release
   - notification_fail
 
-CentOS-6:
+.tag_template: &tag_build
   stage: package
-  script: "echo ${CI_JOB_NAME}"
+  script:
+    - "echo ${CI_JOB_NAME}"
 
-CentOS-7:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
+dependency_scanning:
+  image: alpine:3.7
+  stage: scan-dependencies
+  script:
+    - "echo ${CI_JOB_NAME}"
 
-Debian-7:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
+.staging_upload_template: &staging_upload
+  stage: staging_upload
+  script:
+    - "echo ${CI_JOB_NAME}"
 
-Debian-8:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-9.1:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
-
-OpenSUSE-43.1:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
-
-SLES-12:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
+.production_release_template: &production_release
+  stage: package-release
+  script:
+    - "echo ${CI_JOB_NAME}"
 
 Ubuntu-14.04:
-  stage: package
-  script: "echo ${CI_JOB_NAME}"
-
+  <<: *tag_build
 Ubuntu-16.04:
+  <<: *tag_build
+Debian-7:
+  <<: *tag_build
+Debian-8:
+  <<: *tag_build
+Debian-9.1:
+  <<: *tag_build
+CentOS-6:
+  <<: *tag_build
+CentOS-7:
+  <<: *tag_build
+OpenSUSE-42.3:
+  <<: *tag_build
+SLES-12:
   stage: package
-  script: "echo ${CI_JOB_NAME}"
-
-CentOS-6-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-CentOS-7-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-7-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-8-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-Debian-9.1-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-OpenSUSE-43.1-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-SLES-12-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-Ubuntu-14.04-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
-
-Ubuntu-16.04-staging:
-  stage: staging_upload
-  script: "echo ${CI_JOB_NAME}"
+  script:
+    - "echo ${CI_JOB_NAME}"
 
 Docker:
   stage: images
-  script: "echo ${CI_JOB_NAME}"
-
-CentOS-6-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-CentOS-7-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-Debian-7-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-Debian-8-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-Debian-9.1-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-OpenSUSE-43.1-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-SLES-12-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-Ubuntu-12.04-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
-
-Ubuntu-14.04-release:
-  stage: release
-  script: "echo ${CI_JOB_NAME}"
-  when: manual
+  script:
+    - "echo ${CI_JOB_NAME}"
 
 AWS:
   stage: image-release
-  script: "echo AWS"
-  when: manual
-
-Docker-release:
-  stage: image-release
-  script: "echo Docker"
-  when: manual
+  script:
+    - "echo ${CI_JOB_NAME}"
 
 QA-Tag:
   stage: image-release
-  script: "echo Docker"
-  when: manual
-
-release:packages:
-  stage: trigger-packages
-  when: manual
   script:
-    - echo ${EXIT_STATUS}
-    - exit ${EXIT_STATUS}
-
-release:images:
-  stage: trigger-images
-  when: manual
-  script:
-    - echo ${EXIT_STATUS}
-    - exit ${EXIT_STATUS}
-
-Upgrade:
-  stage: metrics
-  script: "echo Upgrade"
-  when: manual
+    - "echo ${CI_JOB_NAME}"
 
 Raspberry-Pi-2-Jessie:
   stage: raspbian
-  script: "echo RPi"
+  script:
+    - "echo ${CI_JOB_NAME}"
+
+notify:slack-fail:
+  stage: notification_fail
+  script:
+    - "echo ${CI_JOB_NAME}"
+
+# Staging upload
+Ubuntu-14.04-staging:
+  dependencies:
+    - Ubuntu-14.04
+  <<: *staging_upload
+Ubuntu-16.04-staging:
+  dependencies:
+    - Ubuntu-16.04
+  <<: *staging_upload
+Debian-7-staging:
+  dependencies:
+    - Debian-7
+  <<: *staging_upload
+Debian-8-staging:
+  dependencies:
+    - Debian-8
+  <<: *staging_upload
+Debian-9.1-staging:
+  dependencies:
+    - Debian-9.1
+  <<: *staging_upload
+CentOS-6-staging:
+  dependencies:
+    - CentOS-6
+  <<: *staging_upload
+CentOS-7-staging:
+  dependencies:
+    - CentOS-7
+  <<: *staging_upload
+OpenSUSE-42.3-staging:
+  dependencies:
+    - OpenSUSE-42.3
+  <<: *staging_upload
+SLES-12-staging:
+  variables:
+    RUN_ONLY_EE: 'true'
+  dependencies:
+    - SLES-12
+  allow_failure: true
+  <<: *staging_upload
+
+# Release
+Ubuntu-14.04-release:
+  dependencies:
+    - Ubuntu-14.04
+  <<: *production_release
+Ubuntu-16.04-release:
+  dependencies:
+    - Ubuntu-16.04
+  <<: *production_release
+Debian-7-release:
+  dependencies:
+    - Debian-7
+  <<: *production_release
+Debian-8-release:
+  dependencies:
+    - Debian-8
+  <<: *production_release
+Debian-9.1-release:
+  dependencies:
+    - Debian-9.1
+  <<: *production_release
+CentOS-6-release:
+  dependencies:
+    - CentOS-6
+  <<: *production_release
+CentOS-7-release:
+  dependencies:
+    - CentOS-7
+  <<: *production_release
+OpenSUSE-42.3-release:
+  dependencies:
+    - OpenSUSE-42.3
+  <<: *production_release
+SLES-12-release:
+  variables:
+    RUN_ONLY_EE: 'true'
+  dependencies:
+    - SLES-12
+  allow_failure: true
+  <<: *production_release
 
 Raspberry-Pi-2-Jessie-release:
   stage: raspbian_release
-  script: "echo RPi release"
+  image: "dev.gitlab.org:5005/gitlab/gitlab-build-images:omnibus-gitlab-xenial"
+  script:
+    - "echo ${CI_JOB_NAME}"
+
+Docker-Release:
+  stage: image-release
+  script:
+    - "echo ${CI_JOB_NAME}"
+
+upgrade:
+  stage: metrics
+  script:
+    - "echo ${CI_JOB_NAME}"
+
+release:packages:
+  stage: trigger-packages
+  script:
+    - "echo ${CI_JOB_NAME}"
+  when: manual
+
+release:images:
+  stage: trigger-images
+  script:
+    - "echo ${CI_JOB_NAME}"
   when: manual
