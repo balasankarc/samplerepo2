@@ -1,4 +1,4 @@
-image: alpine:latest
+image: ruby:2.3
 
 stages:
   - trigger-package
@@ -189,11 +189,14 @@ upgrade:
 release:packages:
   stage: trigger-packages
   script:
-    - "echo ${CI_JOB_NAME}"
+    - bundle install
+    - bundle exec ruby support/trigger-release.rb package-release
   when: manual
 
 release:images:
   stage: trigger-images
   script:
-    - "echo ${CI_JOB_NAME}"
+    - bundle install
+    - bundle exec ruby support/trigger-release.rb image-release
+    - bundle exec ruby support/trigger-release.rb metrics
   when: manual
