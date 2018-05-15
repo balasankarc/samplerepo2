@@ -1,4 +1,5 @@
 release-chart:
+  image: "alpine:latest"
   script:
     - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://gitlab.com/api/v4/projects/balasankarc%2Fcharts.gitlab.io/trigger/pipeline
   only:
