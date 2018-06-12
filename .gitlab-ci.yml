@@ -1,7 +1,13 @@
 release-chart:
   image: "alpine:latest"
   script:
-    - echo "Yes" > ~/item
-  artifacts:
-    paths:
-      - ~/item
+    - exit 1
+  after_script:
+    - echo "I am here"
+
+release-chart2:
+  image: "alpine:latest"
+  script:
+    - exit 0
+  after_script:
+    - echo "I am here"
