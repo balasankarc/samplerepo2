@@ -15,5 +15,6 @@ job2:
 
 job3:
   stage: stage_3
+  script: "echo yes"
   dependencies:
     - job1
