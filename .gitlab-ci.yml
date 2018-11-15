@@ -1,11 +1,8 @@
-.docker_job: &docker_job
-  image: "alpine:latest"
-  variables:
-    VAR1: "Value 1"
-    VAR2: "Value 2"
+variables:
+  VAR1: "Value 1"
+  VAR2: "Value 2"
 
 job1:
-  extends: .docker_job
   variables:
     VAR3: "Value 3"
   script:
