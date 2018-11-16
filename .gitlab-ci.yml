@@ -16,7 +16,7 @@
 knapsack:
   extends: .knapsack-state
   extends: .dedicated-runner
-  stage: prepare
+  stage: build
   before_script: []
   script:
     - echo 'Hello World"
