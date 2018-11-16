@@ -1,11 +1,22 @@
-variables:
-  VAR1: "Value 1"
-  VAR2: "Value 2"
+.dedicated-runner:
+  tags:
+    - gitlab-org
 
-job1:
-  variables:
-    VAR3: "Value 3"
+.knapsack-state:
+  services: []
+  cache:
+    key: "knapsack"
+    paths:
+    - knapsack/
+  artifacts:
+    expire_in: 31d
+    paths:
+    - knapsack/
+
+knapsack:
+  extends: .knapsack-state
+  extends: .dedicated-runner
+  stage: prepare
+  before_script: []
   script:
-    - echo "$VAR1"
-    - echo "$VAR2"
-    - echo "$VAR3"
+    - echo 'Hello World"
