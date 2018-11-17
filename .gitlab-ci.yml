@@ -1,22 +1,16 @@
-.dedicated-runner:
+.template1:
   tags:
     - gitlab-org
 
-.knapsack-state:
-  services: []
-  cache:
-    key: "knapsack"
-    paths:
-    - knapsack/
+.template2:
   artifacts:
-    expire_in: 31d
+    expire_in: 1d
     paths:
-    - knapsack/
+    - out.txt
 
-knapsack:
+release:
   extends: .knapsack-state
   extends: .dedicated-runner
   stage: build
-  before_script: []
   script:
-    - echo 'Hello World"
+    - echo 'Hello World" > out.txt
