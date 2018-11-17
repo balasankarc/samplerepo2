@@ -9,8 +9,8 @@
     - out.txt
 
 release:
-  extends: .knapsack-state
-  extends: .dedicated-runner
+  extends: .template1
+  extends: .template2
   stage: build
   script:
     - echo 'Hello World" > out.txt
