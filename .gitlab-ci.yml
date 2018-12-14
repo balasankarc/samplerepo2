@@ -13,4 +13,4 @@ before_script:
 
 job1:
   script:
-    - echo "Balu is ${BALU"
+    - echo "Balu is ${BALU}"
