@@ -2,7 +2,7 @@ image: "alpine:latest"
 
 .branch_build: &branch_build
   script:
-    - JOB_NAME = ( $CI_JOB_NAME )
+    - JOB_NAME=( $CI_JOB_NAME )
     - echo "${JOB_NAME}"
     - echo "${JOB_NAME[0]}"
     - echo "${JOB_NAME[1]}"
