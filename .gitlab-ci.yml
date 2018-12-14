@@ -1,7 +1,14 @@
-image: "alpine:latest"
+before_script:
+  - ce_only=$(Raspberry)
+  - ee_only=$(SLES HA-Validate)
+  - for item in "${ce_only[@]}" do
+      echo "$item is CE only"
+    done
+  - for item in "${ee_only[@]}" do
+      echo "$item is EE only"
+    done
+  - export BALU="value" 
 
 job1:
-  before_script:
-    - export BALU="asdf"
   script:
-    - echo "$BALU"
+    - echo "Balu is ${BALU"
