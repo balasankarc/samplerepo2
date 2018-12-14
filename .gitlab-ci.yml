@@ -1,6 +1,6 @@
 before_script:
-  - ce_only=$(Raspberry)
-  - ee_only=$(SLES HA-Validate)
+  - ce_only=(Raspberry)
+  - ee_only=(SLES HA-Validate)
   - for item in "${ce_only[@]}" do
       echo "$item is CE only"
     done
