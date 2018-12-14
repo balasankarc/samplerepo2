@@ -1,9 +1,8 @@
-image: "ruby:2.5"
+image: "alpine:latest"
 
-.branch_build: &branch_build
+job1:
   script:
-    - JOB_NAME=( $CI_JOB_NAME )
-    - echo ${JOB_NAME[0]}
-    - echo ${JOB_NAME[1]}
-
-ubuntu_16.04 branch: *branch_build
+    - echo "Hello World"
+  only:
+    refs:
+      - /.*ee\.\d/@balasankarc/samplerepo
