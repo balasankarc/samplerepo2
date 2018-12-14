@@ -1,8 +1,7 @@
 image: "alpine:latest"
 
 job1:
+  before_script:
+    - export BALU="asdf"
   script:
-    - echo "Hello World"
-  only:
-    refs:
-      - /.*ee\.\d/@balasankarc/samplerepo
+    - echo "$BALU"
