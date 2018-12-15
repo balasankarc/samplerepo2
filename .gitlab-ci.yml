@@ -9,6 +9,8 @@ before_script:
       echo "$item is EE only";
       echo "And this line works too";
     done
+  - echo "Let's exit"
+  - exit 0
   - export BALU="value" 
 
 job1:
