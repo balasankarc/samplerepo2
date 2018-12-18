@@ -1,18 +1,6 @@
-before_script:
-  - ce_only=(Raspberry)
-  - ee_only=(SLES HA-Validate)
-  - for item in "${ce_only[@]}"; do
-      echo "$item is CE only";
-      echo "And this line works too";
-    done
-  - for item in "${ee_only[@]}"; do
-      echo "$item is EE only";
-      echo "And this line works too";
-    done
-  - echo "Let's exit"
-  - exit 0
-  - export BALU="value" 
-
-job1:
+.build-job: &build-job
+  image: "${CI_JOB_NAME#-branch}"
   script:
-    - echo "Balu is ${BALU}"
+    - echo "Hello World"
+  
+job1-branch: *build-job
