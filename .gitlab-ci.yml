@@ -14,3 +14,9 @@ job1:
   script:
     - echo "Hello World" > a
   artifacts: *package-artifacts-release
+
+job2:
+  script:
+    - echo "Hello World" > a
+  artifacts: *package-artifacts
+
