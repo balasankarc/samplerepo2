@@ -1,6 +1,16 @@
-.build-job: &build-job
-  image: "${CI_JOB_NAME#-branch}"
+image: "alpine:latest"
+
+.package-artifacts: &package-artifacts
+  when: always
+  expire_in: 1 day
+  paths:
+    - a
+    
+.package-artifacts-release: &package-artifacts-release
+  <<: *package-artifacts
+  expire_in: 7 days
+
+job1:
   script:
-    - echo "Hello World"
-  
-job1-branch: *build-job
+    - echo "Hello World" > a
+  artifacts: *package-artifacts-release
