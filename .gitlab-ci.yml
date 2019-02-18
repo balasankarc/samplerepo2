@@ -1,22 +1,5 @@
 image: "alpine:latest"
 
-.package-artifacts: &package-artifacts
-  when: always
-  expire_in: 1 day
-  paths:
-    - a
-    
-.package-artifacts-release: &package-artifacts-release
-  <<: *package-artifacts
-  expire_in: 7 days
-
 job1:
   script:
-    - echo "Hello World" > a
-  artifacts: *package-artifacts-release
-
-job2:
-  script:
-    - echo "Hello World" > a
-  artifacts: *package-artifacts
-
+    - echo "Hello World"
