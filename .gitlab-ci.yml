@@ -2,4 +2,11 @@ image: "alpine:latest"
 
 job1:
   script:
-    - env
+    - echo 'Hello world'
+  only:
+    refs:
+      - branches
+      - schedules
+  except:
+    refs:
+      - master
