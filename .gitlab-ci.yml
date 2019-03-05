@@ -2,9 +2,6 @@ image: "alpine:latest"
 
 job1:
   script:
-    - echo 'Hello world'
-  only:
-    variables:
-      - $CI_PIPELINE_SOURCE =~ /^schedule$/
-      - $CI_COMMIT_REF_NAME =~ /\b(?!master)\b\S+/
-      
+    - export VAL='balasankar'
+  after_script:
+    - echo $VAL
