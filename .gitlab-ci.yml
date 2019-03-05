@@ -4,9 +4,6 @@ job1:
   script:
     - echo 'Hello world'
   only:
-    refs:
-      - branches
-      - schedules
-  except:
-    refs:
-      - master
+    variables:
+      - $CI_PIPELINE_SOURCE == 'schedule'
+      - $CI_COMMIT_REF_NAME != 'master'
