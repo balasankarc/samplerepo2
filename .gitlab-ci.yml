@@ -7,4 +7,3 @@ job1:
     variables:
       - $CI_PIPELINE_SOURCE =~ /^schedule$/
       - $CI_COMMIT_REF_NAME =~ /^[^master]$/
-      
