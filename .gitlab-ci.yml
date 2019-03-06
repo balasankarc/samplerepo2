@@ -1,7 +1,7 @@
 image: "alpine:latest"
 
 job1:
-  script:
+  before_script:
     - export VAL='balasankar'
-  after_script:
-    - echo $VAL
+  script:
+    - echo ${VAL}
