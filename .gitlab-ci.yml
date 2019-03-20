@@ -1,7 +1,5 @@
 image: "alpine:latest"
 
 job1:
-  before_script:
-    - export VAL='balasankar'
   script:
-    - echo ${VAL}
+    - echo ${CI_REGISTRY_USER}
