@@ -1,5 +1,17 @@
-image: "alpine:latest"
-
+variables:
+  BUILDER_IMAGE_REGISTRY: "dev.gitlab.org:5005/cookbooks/gitlab-omnibus-builder"
+  PUBLIC_BUILDER_IMAGE_REGISTRY: "registry.gitlab.com/gitlab-org/gitlab-omnibus-builder"
+  BUILDER_IMAGE_REVISION: "0.0.33"
+ 
 job1:
+  image: "${PUBLIC_BUILDER_IMAGE_REGISTRY}/ruby_docker:${BUILDER_IMAGE_REVISION}"
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375
+  services:
+    - docker:dind
   script:
-    - echo ${CI_REGISTRY_USER}
+    - docker login -u ${CI_REGISTRY_USER} -p ${BALU_DEV_PAT} "dev.gitlab.org:5005"
+    - docker pull alpine:latest
+    - docker tag alpine:latest "dev.gitlab.org:5005/balasankarc/samplerepo/alpine:latest"
+    - docker push "dev.gitlab.org:5005/balasankarc/samplerepo/alpine:latest"
