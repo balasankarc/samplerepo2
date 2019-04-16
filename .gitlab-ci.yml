@@ -3,8 +3,4 @@ onboarding:
   image: "registry.gitlab.com/gitlab-org/gitlab-omnibus-builder/ruby_docker:0.0.33"
   script:
     - echo "Hello World"
-  only:
-    - tags
-  except:
-    variables:
-      - $CI_COMMIT_TAG =~ /^.*\+rc.*/
+  except: []
