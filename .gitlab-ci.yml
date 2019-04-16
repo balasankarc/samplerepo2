@@ -1,6 +1,13 @@
-onboarding:
-  stage: build
-  image: "registry.gitlab.com/gitlab-org/gitlab-omnibus-builder/ruby_docker:0.0.33"
+image: "alpine:latest"
+
+only-branch:
   script:
     - echo "Hello World"
-  except: []
+  only:
+    - branches@balasankarc/samplerepo
+    
+only-tag:
+  script:
+    - echo "Hello World"
+  only:
+    - tags@balasankarc/samplerepo
