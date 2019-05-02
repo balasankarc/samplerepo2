@@ -1,13 +1,5 @@
-image: "alpine:latest"
-
-only-branch:
+image: "ruby:2.5.3-alpine"
+job:
   script:
     - echo "Hello World"
-  only:
-    - branches@balasankarc/samplerepo
     
-only-tag:
-  script:
-    - echo "Hello World"
-  only:
-    - tags@balasankarc/samplerepo
