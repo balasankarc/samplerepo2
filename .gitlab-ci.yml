@@ -1,5 +1,5 @@
 image: "ruby:2.5.3-alpine"
 job:
   script:
-    - echo "Hello World"
+    - cat test.rb
     
